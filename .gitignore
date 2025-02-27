@@ -1,0 +1,7 @@
+cosign.key
+cosign.pub
+.grype.yaml
+*vex*.json
+slides.md
+slides.pdf
+.DS_Store

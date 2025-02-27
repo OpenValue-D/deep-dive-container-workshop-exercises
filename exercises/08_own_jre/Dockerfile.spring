@@ -1,0 +1,39 @@
+FROM azul/zulu-openjdk:21.0.5-jdk AS java
+
+RUN apt-get update \
+   && DEBIAN_FRONTEND=noninteractive apt-get install -y binutils
+WORKDIR /app
+
+COPY . .
+
+RUN ./mvnw package && mv target/demo-0.0.1-SNAPSHOT.jar application.jar
+
+RUN java -Djarmode=tools -jar application.jar extract --layers --destination test
+
+RUN jdeps --ignore-missing-deps -q  \
+    --recursive  \
+    --multi-release 21  \
+    --print-module-deps  \
+    --class-path '/app/test/dependencies/lib/*'  \
+    /app/test/application/application.jar > deps.info
+
+RUN jlink \
+    --add-modules $(cat deps.info) \
+    --compress zip-9 \
+    --strip-debug \
+    --no-header-files \
+    --no-man-pages \
+    --output /myjre
+
+FROM my-distro
+
+ENV JAVA_HOME=/opt/java
+ENV PATH=$JAVA_HOME/bin:$PATH
+COPY --from=java /myjre /opt/java
+WORKDIR /application
+COPY --from=java /app/test/dependencies/ ./
+COPY --from=java /app/test/spring-boot-loader/ ./
+COPY --from=java /app/test/snapshot-dependencies/ ./
+COPY --from=java /app/test/application/ ./
+ENTRYPOINT ["java"]
+CMD ["-jar", "application.jar"]

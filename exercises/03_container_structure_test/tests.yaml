@@ -1,0 +1,12 @@
+schemaVersion: 2.0.0
+metadataTest:
+  exposedPorts: ["3000"]
+  workdir: "/app"
+  envVars:
+  - key: "NODE_ENV"
+    value: "production"
+commandTests:
+- name: "check node version"
+  command: "node"
+  args: ["--version"]
+  expectedOutput: ["v23.6.0"]

@@ -13,8 +13,8 @@ Use hadolint to find issues.
 * Check the result
 * Visit https://github.com/hadolint/hadolint?tab=readme-ov-file#rules to get more details for each issue and how to fix it
 * Fix DL3027 with the help of the rule documentation (https://github.com/hadolint/hadolint/wiki/DL3027)
-* Rerun hadolint and see the new issue in the line
-* Fix all other issues of line 9 (use version `2:1.22~2build1` for the golang-go package)
+* Rerun hadolint and see a new issue in line 9
+* Fix the new issue in line 9 (use version `2:1.22~2build1` for the golang-go package)
 
 ## Task 2
 
@@ -64,3 +64,4 @@ See integration in action to get linting directly in the editor
 * Go to the extensions in VSCode
 * Install the hadolint extension (identifier = exiasr.hadolint)
 * Open the Dockerfile in VSCode and see the hadolint results in line
+* Fix all issues

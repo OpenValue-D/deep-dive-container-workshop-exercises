@@ -5,3 +5,4 @@ cosign.pub
 slides.md
 slides.pdf
 .DS_Store
+.hadolint.yaml

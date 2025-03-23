@@ -19,7 +19,7 @@ Read in a sbom file instead of an image
 
 * Generate a sbom file with `syft -o spdx-json ubuntu:24.10 > sbom.json`
 * Run `grype sbom:./sbom.json`
-* Download sbom attestation from previous exercise and run grype against it with `cosign download attestation ttl.sh/${MY_DISTRO}:1h | jq -r '.payload | @base64d | fromjson | .predicate' | grype --distro ubuntu:24.10`
+* Download sbom attestation from previous exercise and run grype against it with `cosign download attestation ttl.sh/${MY_DISTRO}:4h | jq -r '.payload | @base64d | fromjson | .predicate' | grype --distro ubuntu:24.10`
 
 ## Task 3
 
@@ -37,7 +37,7 @@ Configure and filter grype output
 ignore:
 - fix-state: not-fixed
 - fix-state: wont-fix
-fail-on-severity: "Critical"
+fail-on-severity: critical
 ```
 
 * Run `grype postgres:17.2`. Result should now be the same as `grype postgres:17.2 --only-fixed -f critical`

@@ -5,7 +5,7 @@ RUN apt-get update \
 WORKDIR /app
 
 RUN jlink \
-    --add-modules java.base,java.net.http,java.sql \
+    --add-modules ADD_MODULES_HERE \
     --compress zip-9 \
     --strip-debug \
     --no-header-files \

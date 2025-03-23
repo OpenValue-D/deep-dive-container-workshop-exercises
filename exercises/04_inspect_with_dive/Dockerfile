@@ -1,5 +1,5 @@
 FROM alpine
 
-COPY hello.sh .
+COPY --chmod=777 . .
 
 CMD ["./hello.sh"]

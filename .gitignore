@@ -4,5 +4,6 @@ cosign.pub
 *vex*.json
 slides.md
 slides.pdf
+slides.html
 .DS_Store
 .hadolint.yaml
